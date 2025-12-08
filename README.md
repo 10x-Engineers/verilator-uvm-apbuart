@@ -10,11 +10,11 @@
   6. apbuart_rec_reg_test  
 
 **HOW TO USE MAKEFILE:**  
-  Design files are in *design* folder, *uvm_lib* directory contains custom UVM library and UVM testbench components are in *uvm_tb* folder. Now go to the *sim* folder where you'll find a Makefile.
+  Design files are in design folder, uvm_lib directory contains custom UVM library and UVM testbench components are in uvm_tb folder. Now go to the sim folder where you'll find a Makefile. Now go to the *sim* folder where you'll find a Makefile.
+  
   This Makefile has following targets:  
-    **1. compile:**      to compile the design files available in the *design* folder  
-    **2. run:**          to run all the available test cases on the compiled design  
-    **3. test-list:**    to print the tests names  
-    **4. run_cov_all:**  to run all the available test cases with coverage report on the compiled design  
-    **5. run-test:**     to run any specific test e.g *$ make run-test TEST=apbuart_frame_error_test*  
-    **6. clean:**        to clean the generated simulation and log files  
+    **1. all_tests:**     to run all the available test cases on the compiled design  
+    **2. compile:**       to compile all the design and tb files  
+    **3. sim:**           to run any specific test e.g *$ make sim TEST=apbuart_frame_error_test*  
+    **4. clean:**         to clean the generated simulation, database and log files   
+    **5. run:**           to clean, compile and run any specific test e.g *$ make run TEST=apbuart_frame_error_test*  

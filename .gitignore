@@ -1,0 +1,7 @@
+# ignore verilator object directory
+sim/apb_uart_obj_dir
+
+# ignore verilator generated files
+sim/*.log
+sim/*.dat
+sim/*.vcd

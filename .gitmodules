@@ -1,3 +1,4 @@
 [submodule "uvm_lib/uvm-verilator"]
 	path = uvm_lib/uvm-verilator
 	url = https://github.com/10x-Engineers/uvm-verilator.git
+	branch = uvm-1.2-current-patches

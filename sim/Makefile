@@ -1,9 +1,9 @@
 TEST="apbuart_config_test"
 VERBOS=UVM_MEDIUM
-VERIF_DIR := $(realpath ../../apb_uart_verif)
+VERIF_DIR := $(realpath ../../verilator-uvm-apbuart)
 RTL 		:= 	$(VERIF_DIR)/design
 TB			:=  $(VERIF_DIR)/uvm_tb
-UVM_LIB	:=  $(VERIF_DIR)/uvm_lib/uvm-1.2-current-patches/src
+UVM_LIB	:=  $(VERIF_DIR)/uvm_lib/uvm-verilator/src
 
 #------------------------
 ARG_VERILATOR				+=	--exe

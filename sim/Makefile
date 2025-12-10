@@ -50,11 +50,20 @@ $(TEST_LIST):
 	@ echo "-----------------------------"
 	./apb_uart_obj_dir/apb_uart_simv +UVM_TESTNAME=$(UVM_TEST_NAME) +UVM_VERBOSITY=$(VERBOS)
 
+cov:	
+	@ echo "-------------------------------"
+	@ echo "---Coverage Report Generated---"
+	@ echo "-------------------------------"
+	verilator_coverage --annotate cov_dir coverage.dat
+	verilator_coverage --write-info coverage.info coverage.dat
+	genhtml --branch-coverage coverage.info -o cov_html
+	google-chrome cov_html/index.html
+
 clean:
 	@ echo "-----------------------------"
 	@ echo "       ---CLEANING---"
 	@ echo "-----------------------------"
-	rm -rf apb_uart_obj_dir/ *.vcd coverage.dat *.log
+	rm -rf apb_uart_obj_dir/ *.vcd coverage.dat coverage.info cov_html/ cov_dir/ *.log 
 
 run:
 	make clean compile sim

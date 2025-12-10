@@ -3,6 +3,8 @@ class config_apbuart extends uvm_sequence #(apb_transaction);
 	`uvm_object_utils (config_apbuart)
 
 	apb_transaction apbuart_sq;
+	apb_transaction apbuart_sq_copy;
+	apb_transaction apbuart_sq_clone;
 	uart_config 		cfg;
 
   function new (string name = "config_apbuart");
@@ -42,8 +44,9 @@ class rec_reg_test extends uvm_sequence#(apb_transaction);
 endclass: rec_reg_test
 
 task config_apbuart::body();
-	apbuart_sq 	= apb_transaction::type_id::create("apbuart_sq");
-	cfg 				= uart_config::type_id::create("cfg");
+	apbuart_sq 				= apb_transaction::type_id::create("apbuart_sq");
+	apbuart_sq_copy 	= apb_transaction::type_id::create("apbuart_sq_copy");
+	cfg 							= uart_config::type_id::create("cfg");
 	
 	`ifndef VERILATOR 
 		// Write data for Configuring the registers
@@ -73,9 +76,12 @@ task config_apbuart::body();
 								)
 	`else
 		// Write data for Configuring the registers
-		assert(apbuart_sq.randomize());
-		apbuart_sq.PWRITE = 1'b1;
-		apbuart_sq.PADDR 	= cfg.baud_config_addr;
+		assert(apbuart_sq_copy.randomize());
+		apbuart_sq_copy.PWRITE 	= 1'b1;
+		apbuart_sq_copy.PADDR 	= cfg.baud_config_addr;
+		// apbuart_sq_copy.print();
+		apbuart_sq.copy(apbuart_sq_copy); // copy method 
+		// apbuart_sq.print();
 		`uvm_send(apbuart_sq)
 
 		apbuart_sq.PWRITE = 1'b0;
@@ -85,6 +91,10 @@ task config_apbuart::body();
 		assert(apbuart_sq.randomize());
 		apbuart_sq.PWRITE = 1'b1;
 		apbuart_sq.PADDR 	= cfg.frame_config_addr;
+		// apbuart_sq.print();
+		$cast(apbuart_sq_clone, apbuart_sq.clone); // clone method, creates and copies
+		// $display("Printing apbuart_sq_clone");
+		// apbuart_sq_clone.print();
 		`uvm_send(apbuart_sq);
 
 		apbuart_sq.PWRITE = 1'b0;

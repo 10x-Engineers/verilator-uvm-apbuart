@@ -177,7 +177,7 @@ function void apbuart_scoreboard::compare_transmission (apb_transaction apb_pkt,
 	if(apb_pkt.PWDATA == uart_pkt.transmitter_reg) 
     	`uvm_info(get_type_name(),$sformatf("------ :: Transmission Data Packet Match :: ------"),UVM_LOW)
   	else
-    	`uvm_info(get_type_name(),$sformatf("------ :: Transmission Data Packet MisMatch :: ------"),UVM_LOW)
+    	`uvm_error(get_type_name(),$sformatf("------ :: Transmission Data Packet MisMatch :: ------"))
 	`uvm_info(get_type_name(),$sformatf("Expected Transmission Data Value : %0h Actual Transmission Data Value: %0h",apb_pkt.PWDATA,uart_pkt.transmitter_reg),UVM_LOW)   
 	`uvm_info(get_type_name(),"------------------------------------\n",UVM_LOW)
 endfunction  

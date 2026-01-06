@@ -127,8 +127,12 @@ task transmit_single_beat::body();
 	cfg					= uart_config::type_id::create("cfg");
 
 	`uvm_do_with(	apbuart_sq,{apbuart_sq.PWRITE == 1'b1;
+														apbuart_sq.PWDATA == 32'h0000_0000;
 														apbuart_sq.PADDR  == cfg.trans_data_addr;}
 							)
+	`uvm_do_with(	apbuart_sq,{apbuart_sq.PWRITE == 1'b1;
+								apbuart_sq.PADDR  == cfg.trans_data_addr;}
+	)
 endtask  
 
 task rec_reg_test::body();

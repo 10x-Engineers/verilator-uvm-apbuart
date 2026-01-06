@@ -18,6 +18,7 @@ ARG_VERILATOR				+=	--trace
 ARG_VERILATOR				+=	--assert
 ARG_VERILATOR				+=	--coverage
 ARG_VERILATOR				+=	--hierarchical
+ARG_VERILATOR				+=	--x-assign unique
 
 DISABLED_WARNINGS		+=	-Wno-SIDEEFFECT
 DISABLED_WARNINGS		+=	-Wno-fatal
@@ -56,7 +57,7 @@ cov:
 	@ echo "-------------------------------"
 	verilator_coverage --annotate cov_dir coverage.dat
 	verilator_coverage --write-info coverage.info coverage.dat
-	genhtml --branch-coverage coverage.info -o cov_html
+	genhtml --branch-coverage --function-coverage coverage.info -o cov_html
 	google-chrome cov_html/index.html
 
 clean:
